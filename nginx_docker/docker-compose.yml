@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: ./nginx_middleware
+      dockerfile: Dockerfile
+    image: mynginx
+    container_name: mynginx
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./static:/var/html_static
+      - ./nginx_middleware/conf.d:/etc/nginx/conf.d
+    restart: unless-stopped
