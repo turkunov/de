@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+
+  db:
+    container_name: postgres_container
+    image: postgres:13-alpine
+    restart: 'always'
+    environment:
+      POSTGRES_USER: ${MYSQL_USER}
+      POSTGRES_PASSWORD: ${MYSQL_PASSWORD}
+      POSTGRES_DB: ${MYSQL_DATABASE}
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${MYSQL_USER} -d ${MYSQL_DATABASE}'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    ports:
+      - "${MYSQL_PORT}:${MYSQL_PORT}"
+    networks:
+      - dbnet
+
+  web:
+    build:
+      context: ./python_app
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_PORT: ${MYSQL_PORT}
+      APP_PORT: ${APP_PORT}
+      NET_IP: ${NET_IP}
+    restart: unless-stopped
+    volumes:
+      - ./static:/python_app/static
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    networks:
+      - dbnet
+
+networks:
+  default: {}
+  dbnet:
+    driver: bridge
+    name: dbnet

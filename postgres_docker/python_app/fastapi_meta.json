@@ -1,0 +1,11 @@
+{
+    "CLIENT_META": {
+      "title": "`Hi, my name is..` project",
+      "description": "",
+      "contact": {
+          "name": "Turkunov Yaroslav",
+          "url": "mailto:a@b.c"
+      },
+      "version": "0.0.1"
+    }
+  }

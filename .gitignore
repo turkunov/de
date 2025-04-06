@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# temporary ignores
+airflow_docker/
+
 # Distribution / packaging
 .Python
 build/
