@@ -1,0 +1,9 @@
+fastapi[standard]
+SQLAlchemy
+psycopg2
+uvicorn
+alembic
+pydantic
+requests
+beautifulsoup4
+Faker
