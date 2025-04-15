@@ -1,0 +1,19 @@
+{
+    "name": "node-server",
+    "version": "1.0.0",
+    "description": "Node.js server with token authentication",
+    "main": "src/app.js",
+    "type": "module",
+    "scripts": {
+        "start": "node src/app.js",
+        "dev": "nodemon src/app.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "cookie-parser": "^1.4.6",
+        "morgan": "^1.10.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}

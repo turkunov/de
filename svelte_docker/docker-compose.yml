@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    environment:
+      - NODE_ENV=production
+      - PORT=${APP_PORT}
+      - SECRET_TOKEN=${SECRET_TOKEN}
+      - HOST=0.0.0.0
+    restart: unless-stopped
+    user: "appuser"
